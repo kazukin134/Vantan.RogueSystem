@@ -90,4 +90,23 @@ public class MapCreateTest : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    // とりあえず適当に通れるか通れないかがとれる関数
+    /// <summary>
+    /// その座標のマスが通れるか通れないか
+    /// </summary>
+    /// <param name="xPos">X座標</param>
+    /// <param name="yPos">Y座標</param>
+    /// <returns></returns>
+    public bool IsPass(int xPos, int yPos)
+    {
+        if (_map[xPos][yPos] == 1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }
