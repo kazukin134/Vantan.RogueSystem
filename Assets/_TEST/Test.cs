@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+  /*
   InputAxisManager manager { get { return InputAxisManager.entity; } }
 
   void Update()
@@ -11,6 +12,7 @@ public class Test : MonoBehaviour
     if (axis == 0) { return; }
     Debug.Log(axis);
   }
+  */
 }
 
 /*
