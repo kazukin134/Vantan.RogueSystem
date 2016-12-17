@@ -59,8 +59,8 @@ public class PlayerState : MonoBehaviour {
 
     void Update()
     {
-        horizontal = InputAxisManager.entity.horizontal.axis;
-        vertical = InputAxisManager.entity.vertical.axis;
+        horizontal = InputAxisManager.x;
+        vertical = InputAxisManager.z;
 
     }
 

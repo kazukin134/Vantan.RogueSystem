@@ -1,16 +1,10 @@
 
 using UnityEngine;
-using System;
 
-[Serializable]
+[System.Serializable]
 public class InputAxis
 {
-  [AttributeUsage(AttributeTargets.Field)]
-  public class AxisIndexAttribute : PropertyAttribute
-  {
-    public AxisIndexAttribute() {}
-    public int selected = 0;
-  }
+  public class AxisIndexAttribute : IndexAttribute { }
 
   [SerializeField, AxisIndex]
   string _name = string.Empty;
