@@ -8,14 +8,6 @@ using UnityEngine;
 /// </summary>
 public class CameraRotater : MonoBehaviour {
 
-    enum Direction
-    {
-        Left,
-        Right
-    }
-
-    private Direction _direction = Direction.Left;
-
     public enum RotateState
     {
         Vertical,
@@ -31,6 +23,10 @@ public class CameraRotater : MonoBehaviour {
     private float _rotateMoveTime = 2.0f;
 
     private bool _isRotate = false;
+    public bool isRotate
+    {
+        get { return _isRotate; }
+    }
 
     void Start()
     {
@@ -40,17 +36,10 @@ public class CameraRotater : MonoBehaviour {
     void Update()
     {
         if (_isRotate) return;
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Q))
+        if(InputAxisManager.cameraRotateDirection != 0 && InputAxisManager.isDiagonal)
         {
-            _direction = Direction.Left;
             StartCoroutine(Rotate());
         }
-        else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.E))
-        {
-            _direction = Direction.Right;
-            StartCoroutine(Rotate());
-        }
-
     }
 
     private IEnumerator Rotate()
@@ -59,7 +48,7 @@ public class CameraRotater : MonoBehaviour {
         cameraState = cameraState == RotateState.Horizontal ? RotateState.Vertical : RotateState.Horizontal;
         var time = 0.0f;
         var rotation = transform.eulerAngles;
-        float endRotationY = _direction == Direction.Right ? transform.eulerAngles.y - 90 : transform.eulerAngles.y + 90;
+        float endRotationY = transform.eulerAngles.y + (90 * InputAxisManager.cameraRotateDirection);
         while (time < _rotateMoveTime)
         {
             time += Time.deltaTime;

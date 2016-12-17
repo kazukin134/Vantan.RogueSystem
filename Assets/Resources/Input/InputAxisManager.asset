@@ -15,5 +15,9 @@ MonoBehaviour:
     _name: Horizontal
   _vertical:
     _name: Vertical
-  _action:
-    _name: Fire1
+  _lockMove:
+    _name: lockMove
+  _diagonal:
+    _name: Shift
+  _cameraRotate:
+    _name: cameraRotate
