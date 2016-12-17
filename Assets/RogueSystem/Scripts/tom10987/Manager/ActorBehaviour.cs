@@ -7,7 +7,9 @@ public abstract class ActorBehaviour : MonoBehaviour
   protected virtual void Awake() { ActorManager.Add(this); }
   protected virtual void OnDestroy() { ActorManager.Remove(this); }
 
-  public virtual bool isAwake { get { return true; } }
+  // コルーチンなど、更新が完了したら true を返すようにする
+  public bool updateFinished { get; protected set; }
 
-  public abstract void UpdateAction(float deltaTime);
+  // １ターンあたりの行動を実行する処理を作る
+  public abstract void UpdateAction();
 }
