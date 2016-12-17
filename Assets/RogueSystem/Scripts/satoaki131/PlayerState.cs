@@ -16,12 +16,22 @@ public class PlayerState : MonoBehaviour {
         get { return _camera; }
     }
 
+    private float _moveTime = 1.0f;
+    public float moveTime
+    {
+        get { return _moveTime; }
+    }
+
     public enum Direction
     {
         Left,
         Right,
         Up,
-        Down
+        Down,
+        LeftUp,
+        LeftDown,
+        RightUp,
+        RightDown
     }
 
     /// <summary>

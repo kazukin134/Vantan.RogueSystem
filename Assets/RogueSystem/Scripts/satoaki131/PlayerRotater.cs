@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// Playerの回転に関するスクリプト
 /// </summary>
-public class PlayerRotater : MonoBehaviour {
+public class PlayerRotater : MonoBehaviour
+{
 
     private PlayerState _state = null;
 
@@ -21,7 +22,23 @@ public class PlayerRotater : MonoBehaviour {
 
     private void RotationUpdate()
     {
-        if (_state.vertical > 0)
+        if (_state.vertical > 0 && _state.horizontal > 0 && InputAxisManager.isDiagonal)
+        {
+            _state.setPlayerState(PlayerState.Direction.RightUp);
+        }
+        else if (_state.vertical > 0 && _state.horizontal < 0 && InputAxisManager.isDiagonal)
+        {
+            _state.setPlayerState(PlayerState.Direction.LeftUp);
+        }
+        else if (_state.vertical < 0 && _state.horizontal > 0 && InputAxisManager.isDiagonal)
+        {
+            _state.setPlayerState(PlayerState.Direction.RightDown);
+        }
+        else if (_state.vertical < 0 && _state.horizontal < 0 && InputAxisManager.isDiagonal)
+        {
+            _state.setPlayerState(PlayerState.Direction.LeftDown);
+        }
+        else if (_state.vertical > 0)
         {
             _state.setPlayerState(PlayerState.Direction.Up);
         }
@@ -74,6 +91,34 @@ public class PlayerRotater : MonoBehaviour {
                 cameraForward == Vector3.right ? Quaternion.identity :
                 cameraForward == Vector3.back ? Quaternion.Euler(0, 90, 0) :
                 cameraForward == Vector3.left ? Quaternion.Euler(0, 180, 0) : transform.rotation;
+        }
+        else if (_state.playerDirection == PlayerState.Direction.LeftUp)
+        {
+            transform.rotation = cameraForward == Vector3.forward ? Quaternion.Euler(0, 315, 0) :
+                cameraForward == Vector3.right ? Quaternion.Euler(0, 45, 0) :
+                cameraForward == Vector3.back ? Quaternion.Euler(0, 135, 0) :
+                cameraForward == Vector3.left ? Quaternion.Euler(0, 225, 0) : transform.rotation;
+        }
+        else if (_state.playerDirection == PlayerState.Direction.LeftDown)
+        {
+            transform.rotation = cameraForward == Vector3.forward ? Quaternion.Euler(0, 225, 0) :
+                cameraForward == Vector3.right ? Quaternion.Euler(0, 315, 0) :
+                cameraForward == Vector3.back ? Quaternion.Euler(0, 45, 0) :
+                cameraForward == Vector3.left ? Quaternion.Euler(0, 135, 0) : transform.rotation;
+        }
+        else if (_state.playerDirection == PlayerState.Direction.RightUp)
+        {
+            transform.rotation = cameraForward == Vector3.forward ? Quaternion.Euler(0, 45, 0) :
+                cameraForward == Vector3.right ? Quaternion.Euler(0, 135, 0) :
+                cameraForward == Vector3.back ? Quaternion.Euler(0, 225, 0) :
+                cameraForward == Vector3.left ? Quaternion.Euler(0, 315, 0) : transform.rotation;
+        }
+        else if (_state.playerDirection == PlayerState.Direction.RightDown)
+        {
+            transform.rotation = cameraForward == Vector3.forward ? Quaternion.Euler(0, 135, 0) :
+                cameraForward == Vector3.right ? Quaternion.Euler(0, 225, 0) :
+                cameraForward == Vector3.back ? Quaternion.Euler(0, 315, 0) :
+                cameraForward == Vector3.left ? Quaternion.Euler(0, 45, 0) : transform.rotation;
         }
 
     }
